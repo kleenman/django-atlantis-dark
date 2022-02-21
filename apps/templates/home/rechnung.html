@@ -1,0 +1,106 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Tables {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<div class="content">
+		<div class="page-inner">
+			<div class="page-header">
+				<h4 class="page-title">Tables</h4>
+				<ul class="breadcrumbs">
+					<li class="nav-home">
+						<a href="#">
+							<i class="flaticon-home"></i>
+						</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">Tables</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">Basic Tables</a>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<div class="col-md-10">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">Hoverable Table</div>
+						</div>
+						<div class="card-body">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+                                        <th scope="col">Name</th>
+										<th scope="col">Bier</th>
+                                        <th scope="col">Kasten</th>
+                                        <th scope="col">Wein</th>
+                                        <th scope="col">Gesamt</th>
+									</tr>
+								</thead>
+								<tbody>
+                                    {% for bbr in data %}
+                                        <tr>
+                                            <td>{{ bbr.full_name }}</td>
+                                            <td>{{ bbr.bier }}</td>
+                                            <td>{{ bbr.kasten }}</td>
+                                            <td>{{ bbr.wein }}</td>
+                                            <td>{{ bbr.preis }}</td>
+                                        </tr>
+                                    {% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+	<!-- Atlantis DEMO methods, don't include it in your project! -->
+	<script src="/static/assets/js/setting-demo2.js"></script>
+	<script>
+		$('#displayNotif').on('click', function(){
+			var placementFrom = $('#notify_placement_from option:selected').val();
+			var placementAlign = $('#notify_placement_align option:selected').val();
+			var state = $('#notify_state option:selected').val();
+			var style = $('#notify_style option:selected').val();
+			var content = {};
+
+			content.message = 'Turning standard Bootstrap alerts into "notify" like notifications';
+			content.title = 'Bootstrap notify';
+			if (style == "withicon") {
+				content.icon = 'fa fa-bell';
+			} else {
+				content.icon = 'none';
+			}
+			content.url = 'index.html';
+			content.target = '_blank';
+
+			$.notify(content,{
+				type: state,
+				placement: {
+					from: placementFrom,
+					align: placementAlign
+				},
+				time: 1000,
+			});
+		});
+	</script>
+
+{% endblock javascripts %}
